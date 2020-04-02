@@ -4,10 +4,10 @@ import scipy.sparse.linalg
 import matplotlib.pyplot as plt
 import scipy.io
 
-# load images resized to 10% of their original size
+# load images resized to 20% of their original size
 size = 0.1
-image = load_image("/mydata/images/alf.png", "RGB", size, "BILINEAR")
-trimap = load_image("/mydata/images/alf_trimap.png", "GRAY", size, "NEAREST")
+image = load_image("data/lemur.png", "RGB", size, "BILINEAR")
+trimap = load_image("data/lemur_trimap.png", "GRAY", size, "NEAREST")
 h, w = image.shape[:2]
 n = h * w
 
@@ -43,7 +43,7 @@ x_true = x_true[inds].reshape(n, 1)
 b = b[inds].reshape(n, 1)
 
 # save
-scipy.io.savemat("data.mat", mdict={
+scipy.io.savemat("data/alphamatting.mat", mdict={
     'A': A,
     'b': b,
     'x_true': x_true,

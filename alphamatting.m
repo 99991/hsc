@@ -2,7 +2,7 @@ function alphamatting
 
 addpath('mex_funs')
 
-load data.mat
+load data/alphamatting.mat
 
 if 1
     hsc_fun = hsc_setup(A, A, rows, cols);
@@ -18,6 +18,6 @@ sum(abs(A * x - b))
 x(x < 0) = 0;
 x(x > 1) = 1;
 
-imshow(reshape(x, [rows cols]))
+imshow(reshape(x, [rows cols]));
 
 end
