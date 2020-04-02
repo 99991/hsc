@@ -1,13 +1,13 @@
 function hsc_fun = hsc_setup(L, L_orig, rows, cols)
 
 % hsc_setup: Setup the HSC preconditioner for linear
-% system solves. 
+% system solves.
 %
 % For 2D images with known numbers of rows and columns, call as:
-% hsc_fn = hsc_setup(L, rows, columns) 
+% hsc_fn = hsc_setup(L, rows, columns)
 %
 % For 3D meshes, call as:
-% hsc_fn = hsc_setup(L) 
+% hsc_fn = hsc_setup(L)
 % or as
 % hsc_fn = hsc_setup(L, L_orig)
 % where L_orig is the actual cotangent Laplacian and L is a "surrogate" M-matrix
@@ -22,39 +22,39 @@ function hsc_fun = hsc_setup(L, L_orig, rows, cols)
 %
 
 if nargin == 0
-	help hsc_setup
-	return;
+    help hsc_setup
+    return;
 end;
 addpath('mex_funs');
 if (~exist('rows', 'var') || ~exist('cols', 'var'))
-	m = 0;
-	n = 0;
+    m = 0;
+    n = 0;
 else
-	m = rows;
-	n = cols;
+    m = rows;
+    n = cols;
 end;
 
 if (((size(L, 1) ~= m*n) && (m > 0) && (n > 0)) || (size(L, 2) ~= size(L, 1)))
-	fprintf('Some problem with rows/cols values or matrix is not square\n');
-	prec_fn = [];
-	return;
+    fprintf('Some problem with rows/cols values or matrix is not square\n');
+    prec_fn = [];
+    return;
 end;
 
 fprintf('Setting up HSC\n');
 t1  = clock;
 
 % If 2D grid information passed in, use it
-opts.m = m; 
+opts.m = m;
 opts.n = n;
 
 % size of coarsest level
-opts.direct = 512; 
+opts.direct = 512;
 
 % number of pre-smoothing iterations
 % set this on for difficult problems when poor convergence is seen
-opts.pre_smooth_iter = 0; 
+opts.pre_smooth_iter = 1;
 % post-smoothing iterations
-opts.post_smooth_iter = 1; 
+opts.post_smooth_iter = 1;
 % diagonal preconditioning of fine-level variables
 opts.diag_precond = 1;
 
