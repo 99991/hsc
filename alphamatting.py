@@ -4,7 +4,7 @@ import scipy.sparse.linalg
 import matplotlib.pyplot as plt
 import scipy.io
 
-# load images resized to 20% of their original size
+# load images resized to 10% of their original size
 size = 0.1
 image = load_image("data/lemur.png", "RGB", size, "BILINEAR")
 trimap = load_image("data/lemur_trimap.png", "GRAY", size, "NEAREST")
